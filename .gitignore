@@ -13,6 +13,7 @@
 *.ini
 *.class
 *.sql
+*.text
 
 ### IntelliJ IDEA ###
 .idea
