@@ -1,6 +1,7 @@
 package com.home.category;
 
 import lombok.*;
+
 import com.home.post.Post;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +30,10 @@ public class Category {
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private List<Post> post = new ArrayList<>();
 
+	@Builder
+	public Category(Long id) {
+		this.id = id;
+	}
 	
 	@Builder
 	public Category(String name, LocalDateTime regDate, List<Post> post) {

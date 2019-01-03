@@ -1,6 +1,7 @@
 package com.home.post;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -27,6 +28,7 @@ public class Post {
 	private Long id;
 	
 	@Column(length = 500, nullable = false)
+	@NotNull
 	private String title;
 
 	@Lob
@@ -38,7 +40,7 @@ public class Post {
 
 	private LocalDateTime regDate;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 
@@ -47,15 +49,28 @@ public class Post {
 	private User user;
 	
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
-	private List<Comment> comments;
+	private List<Comment> comments = new ArrayList<>();
 
+	@Builder
+	public Post(String title, String content, PostStatus status, Category category, User user) {
+		this.title = title;
+		this.content = content;
+		this.status = status;
+		this.category = category;
+		this.user = user;
+	}
 	
 	@Builder
-	public Post(String title, String content, PostStatus status, LocalDateTime regDate, List<Comment> comments) {
+	public Post(String title, String content, PostStatus status, LocalDateTime regDate, List<Comment> comments, Category category, User user) {
 		this.title = title;
 		this.content = content;
 		this.status = status;
 		this.regDate = regDate;
-		this.comments = comments;
+		if(comments != null){
+			this.comments = comments;
+		}
+		this.category = category;
+		this.user = user;
 	}
+	
 }

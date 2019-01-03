@@ -24,6 +24,7 @@ public class PostRepositoryTest {
 	User user = null;
 	Category category = null;
 	
+	
 	@Autowired
 	PostRepository postRepository;
 	

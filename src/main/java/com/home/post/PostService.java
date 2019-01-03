@@ -1,5 +1,6 @@
 package com.home.post;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,14 @@ public class PostService {
 		Post post = postRepository.findByIdAndStatus(id, status);
 		
 		if (post == null)
-			throw new NotFoundException(id + " not found");
+			throw new NotFoundException(id + " not found!");
 		
 		return post;
+	}
+
+	public Post createPost(Post post) {
+		//post.setRegDate(LocalDateTime.now());
+		return postRepository.save(post);
 	}
 	
 }

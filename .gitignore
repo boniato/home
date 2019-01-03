@@ -12,6 +12,7 @@
 .sts4-cache
 *.ini
 *.class
+*.sql
 
 ### IntelliJ IDEA ###
 .idea
